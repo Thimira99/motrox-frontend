@@ -8,6 +8,19 @@ class jobSheetList extends Component {
     jobSheets: [],
   };
 
+  editJobSheet = (jobSheetId) =>
+    this.props.history.push(`/updateJobSheet/${jobSheetId}`);
+
+  deleteJobSheet = (jobSheetId) => {
+    JobSheetService.deleteJobSheet(jobSheetId).then((res) => {
+      this.setState({
+        jobSheets: this.state.jobSheets.filter(
+          (jobSheet) => jobSheet.jobSheetId !== jobSheetId
+        ),
+      });
+    });
+  };
+
   jobSheetMain = () => {
     this.props.history.push("/jobSheetMain");
   };
@@ -41,7 +54,7 @@ class jobSheetList extends Component {
           </div>
         </div>
         <div className={styles.table}>
-          <div className="table  table-bordered">
+          <div className="table table-bordered">
             <thead>
               <th>Customer Name</th>
               <th>Customer NIC</th>
@@ -58,6 +71,25 @@ class jobSheetList extends Component {
                   <td>{jobDetails.contactNumber}</td>
                   <td>{jobDetails.date}</td>
                   <td>{jobDetails.time}</td>
+                  <td>
+                    <div className={styles.buttons}>
+                      <button
+                        onClick={() => this.editJobSheet(jobDetails.jobSheetId)}
+                        className="btn btn-info btn-sm"
+                      >
+                        Update
+                      </button>
+                      <button className="btn btn-warning btn-sm">View</button>
+                      <button
+                        onClick={() =>
+                          this.deleteJobSheet(jobDetails.jobSheetId)
+                        }
+                        className="btn btn-danger btn-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

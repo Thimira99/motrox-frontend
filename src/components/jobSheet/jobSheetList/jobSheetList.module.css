@@ -23,3 +23,13 @@
 .table th {
   width: 200px;
 }
+
+.buttons {
+  display: flex;
+}
+
+.buttons button {
+  margin-right: 2px;
+  margin-left: 2px;
+  width: 4rem;
+}

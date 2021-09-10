@@ -10,6 +10,18 @@ class JobSheetService{
     createJobSheet(jobSheet){
         return axios.post(JOBSHEET_API_BASE_URL,jobSheet);
     }
+
+    getJobSheetById(jobSheetid){
+        return axios.get(JOBSHEET_API_BASE_URL + '/' + jobSheetid);
+    }
+
+    updateJobSheet(jobSheet,jobSheetId){
+        return axios.put(JOBSHEET_API_BASE_URL + '/' + jobSheetId,jobSheet);
+    }
+
+    deleteJobSheet(jobSheetId){
+        return axios.delete(JOBSHEET_API_BASE_URL + '/' + jobSheetId);
+    }
 }
 
 export default new JobSheetService()

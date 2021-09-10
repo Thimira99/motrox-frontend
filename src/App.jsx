@@ -7,6 +7,7 @@ import JobsheetPart from "./components/jobSheet/jobsheetPart/JobSheetPart";
 import JobSheetMain from "./components/jobSheet/jobSheetMain/jobSheetMain";
 import Main from "./components/jobSheet/jobSheetList/jobSheetList";
 import jobSheetList from "./components/jobSheet/jobSheetList/jobSheetList";
+import UpdateJobSheet from "./components/jobSheet/updateJobSheet/updateJobSheet";
 
 class App extends Component {
   state = {};
@@ -28,6 +29,10 @@ class App extends Component {
                   <Route path="/jobSheet" exact component={jobSheetList} />
                   <Route path="/jobSheetMain" component={JobSheetMain} />
                   <Route path="/jobParts" component={JobsheetPart} />
+                  <Route
+                    path="/updateJobSheet/:jobSheetId"
+                    component={UpdateJobSheet}
+                  />
                 </div>
               </Switch>
             </div>
