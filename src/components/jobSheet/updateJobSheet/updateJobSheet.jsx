@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import styles from "./jobSheetMain.module.css";
-import { useHistory } from "react-router-dom";
+import styles from "../updateJobSheet/updateJobSheet.module.css";
 import JobSheetService from "../../../Services/JobSheetService";
 import { toast } from "react-toastify";
 
-class JobSheetMain extends Component {
+class UpdateJobSheet extends Component {
   state = {
+    jobSheetId: this.props.match.params.jobSheetId,
     customerName: "",
     customerNIC: "",
     vehicelId: "",
@@ -26,11 +26,37 @@ class JobSheetMain extends Component {
     bottomReplace: "",
   };
 
+  componentDidMount() {
+    JobSheetService.getJobSheetById(this.state.jobSheetId).then((res) => {
+      let jobSheet = res.data;
+      this.setState({
+        customerName: jobSheet.customerName,
+        customerNIC: jobSheet.customerNIC,
+        vehicelId: jobSheet.vehicelId,
+        contactNumber: jobSheet.contactNumber,
+        date: jobSheet.date,
+        time: jobSheet.time,
+        frontUsable: jobSheet.frontUsable,
+        frontReplace: jobSheet.frontReplace,
+        rearUsable: jobSheet.rearUsable,
+        rearReplace: jobSheet.rearReplace,
+        lRUsable: jobSheet.lRUsable,
+        lRReplace: jobSheet.lRReplace,
+        topUsable: jobSheet.topUsable,
+        topReplace: jobSheet.topReplace,
+        engineRUsable: jobSheet.engineRUsable,
+        engineRReplace: jobSheet.engineRReplace,
+        bottomUsable: jobSheet.bottomUsable,
+        bottomReplace: jobSheet.bottomReplace,
+      });
+    });
+  }
+
   jobParts = () => {
     window.open("/jobParts");
   };
 
-  saveJobSheet = (e) => {
+  updateJobSheet = (e) => {
     e.preventDefault();
     let jobSheet = {
       customerName: this.state.customerName,
@@ -53,10 +79,12 @@ class JobSheetMain extends Component {
       bottomReplace: this.state.bottomReplace,
     };
     console.log(`jobSheet => ` + JSON.stringify(jobSheet));
-    JobSheetService.createJobSheet(jobSheet).then((res) => {
-      this.props.history.push("/jobSheet");
-      toast.success("Job sheet added");
-    });
+    JobSheetService.updateJobSheet(jobSheet, this.state.jobSheetId).then(
+      (res) => {
+        this.props.history.push("/jobSheet");
+        toast.success("Job Sheet Updated");
+      }
+    );
   };
 
   cancel() {}
@@ -327,8 +355,11 @@ class JobSheetMain extends Component {
                 />
               </div>
             </div>
-            <div className={styles.saveButton}>
-              <button className="btn btn-secondary" onClick={this.saveJobSheet}>
+            <div className={styles.updateButton}>
+              <button
+                className="btn btn-secondary"
+                onClick={this.updateJobSheet}
+              >
                 Save
               </button>
             </div>
@@ -344,4 +375,4 @@ class JobSheetMain extends Component {
   }
 }
 
-export default JobSheetMain;
+export default UpdateJobSheet;
