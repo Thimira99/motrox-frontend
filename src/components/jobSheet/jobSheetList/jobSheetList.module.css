@@ -33,3 +33,12 @@
   margin-left: 2px;
   width: 4rem;
 }
+
+.delete_modal_buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete_modal_buttons button {
+  width: 48%;
+}

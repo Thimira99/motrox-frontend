@@ -1,4 +1,4 @@
-button {
+#jobSheetPartButton {
   width: 100%;
 }
 
@@ -93,4 +93,12 @@ button {
   justify-content: flex-end;
   margin-right: 12rem;
   padding-top: 2rem;
+}
+
+.updateButton button {
+  width: 100%;
+}
+
+.cancelButton button {
+  width: 100%;
 }

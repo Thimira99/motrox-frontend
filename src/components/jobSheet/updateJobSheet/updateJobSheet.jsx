@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "../updateJobSheet/updateJobSheet.module.css";
 import JobSheetService from "../../../Services/JobSheetService";
+import { toast } from "react-toastify";
 
 class UpdateJobSheet extends Component {
   state = {
@@ -81,6 +82,7 @@ class UpdateJobSheet extends Component {
     JobSheetService.updateJobSheet(jobSheet, this.state.jobSheetId).then(
       (res) => {
         this.props.history.push("/jobSheet");
+        toast.success("Job Sheet Updated");
       }
     );
   };
@@ -163,7 +165,11 @@ class UpdateJobSheet extends Component {
     return (
       <div>
         <h2>Job Sheet</h2>
-        <button className="btn btn-primary" onClick={this.jobParts}>
+        <button
+          id={styles.jobSheetPartButton}
+          className="btn btn-primary"
+          onClick={this.jobParts}
+        >
           CLICK HERE TO GET THE ITEM CODE
         </button>
         <div className="container p-3 my-3 bg-light border border-dark ">

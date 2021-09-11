@@ -1,4 +1,4 @@
-button {
+#jobSheetPartButton {
   width: 100%;
 }
 
@@ -88,9 +88,17 @@ button {
   padding-top: 2rem;
 }
 
+.saveButton button {
+  width: 100%;
+}
+
 .cancelButton {
   width: 18%;
   justify-content: flex-end;
   margin-right: 12rem;
   padding-top: 2rem;
+}
+
+.cancelButton button {
+  width: 100%;
 }
