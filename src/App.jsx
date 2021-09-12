@@ -7,6 +7,9 @@ import JobsheetPart from "./components/jobSheet/jobsheetPart/JobSheetPart";
 import JobSheetMain from "./components/jobSheet/jobSheetMain/jobSheetMain";
 import Main from "./components/jobSheet/jobSheetList/jobSheetList";
 import jobSheetList from "./components/jobSheet/jobSheetList/jobSheetList";
+import stockList from "./components/stockItem/stockList/stockList";
+import createStock from "./components/stockItem/stockItemForm/createStock";
+import UpdateStockItem from "./components/stockItem/stockItemUpdate/UpdateStockItem";
 
 class App extends Component {
   state = {};
@@ -28,6 +31,11 @@ class App extends Component {
                   <Route path="/jobSheet" exact component={jobSheetList} />
                   <Route path="/jobSheetMain" component={JobSheetMain} />
                   <Route path="/jobParts" component={JobsheetPart} />
+
+                  {/* Item Master */}
+                  <Route path="/itemMask" exact component={stockList}/>
+                  <Route path="/add-stock" component={createStock}/>
+                  <Route path="/update-stock/:itemcode" component={UpdateStockItem}/>
                 </div>
               </Switch>
             </div>
