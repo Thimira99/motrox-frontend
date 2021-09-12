@@ -7,6 +7,8 @@ import JobsheetPart from "./components/jobSheet/jobsheetPart/JobSheetPart";
 import JobSheetMain from "./components/jobSheet/jobSheetMain/jobSheetMain";
 import Main from "./components/jobSheet/jobSheetList/jobSheetList";
 import jobSheetList from "./components/jobSheet/jobSheetList/jobSheetList";
+import JobCardMain from "./components/JobCard/J_Main/JobCardMain";
+import ListInvoices from "./components/JobCard/J_ListInvoices/ListInvoices";
 
 class App extends Component {
   state = {};
@@ -28,6 +30,9 @@ class App extends Component {
                   <Route path="/jobSheet" exact component={jobSheetList} />
                   <Route path="/jobSheetMain" component={JobSheetMain} />
                   <Route path="/jobParts" component={JobsheetPart} />
+                  <Route path="/jobcard" component={JobCardMain} />
+                  <Route path="/view_all_Jobcards" component={ListInvoices} />
+
                 </div>
               </Switch>
             </div>
