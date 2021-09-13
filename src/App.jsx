@@ -15,9 +15,16 @@ import UpdateJobSheet from "./components/jobSheet/updateJobSheet/updateJobSheet"
 import ViewJobSheet from "./components/jobSheet/viewJobSheet/viewJobSheet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import supplierList from "./components/supplier/supplierList/supplierList";
 import supplierCreate from "./components/supplier/supplierCreate/supplierCreate";
 import supplierView from "./components/supplier/supplierView/supplierView";
+
+
+import customerList from "./components/customer/customerList/customerList";
+import customerView from "./components/customer/customerView/customerView";
+import customerUpdate from "./components/customer/customerUpdate/customerUpdate";
+import customerCreate from "./components/customer/customerCreate/customerCreate";
 
 
 class App extends Component {
@@ -66,6 +73,11 @@ class App extends Component {
                     path="/viewJobSheet/:jobSheetId"
                     component={ViewJobSheet}
                   />
+                  {/* Customer */}
+                <Route path = "/customerDetails" exact component  = {customerList}></Route>
+                <Route path = "/add-customer" component = {customerCreate}></Route>
+                <Route path = "/view-customer/:id" component ={customerView}></Route>
+                <Route path = "/update-customer/:id" component = {customerUpdate}></Route> 
 
                   {/* Supplier */}
                   <Route path = "/supplierDetails" exact component = {supplierList}></Route>
