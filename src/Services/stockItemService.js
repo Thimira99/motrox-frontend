@@ -9,7 +9,7 @@ class stockItemService{
     createStockItem(stockItem){
         return axios.post(STOCKITEM_API_BASE_URL,stockItem)
     }
-    getT_StockItemByItemcode(itemcode){
+    getTStockItemByItemcode(itemcode){
         return axios.get(STOCKITEM_API_BASE_URL + '/'+ itemcode);
     }
     updateStockItem(stockItem, itemcode){

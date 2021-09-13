@@ -13,13 +13,8 @@ class stockList extends Component {
         stockItems:[]
     }
       this.stockListForm = this.stockListForm.bind(this);
-      this.editItem = this.editItem.bind(this);
+      this.updateItems = this.updateItems.bind(this);
     }    
-
-    editItem(itemcode){
-      this.props.history.push(`/update-stock/${itemcode}`);
-    }
-
 componentDidMount(){
   stockItemService.getstockItems().then((res) => {
     this.setState({stockItems: res.data});
@@ -29,6 +24,11 @@ componentDidMount(){
 stockListForm(){
   this.props.history.push('/add-stock');
 }
+
+updateItems = (itemcode) =>{
+  this.props.history.push(`/updateStock/${itemcode}`);
+}
+
 
     render() {
         return (
@@ -65,13 +65,13 @@ stockListForm(){
                   {
                     this.state.stockItems.map(stockItems => 
 
-                        <tr>
+                        <tr key={stockItems.itemcode}>
                         <td>{stockItems.itemcode}</td>
                         <td>{stockItems.itemname}</td>
                         <td>{stockItems.qty}</td>
                         <td>{stockItems.price}</td>
                         <td>
-                          <button onClick ={() => this.editItem(stockItems.itemcode)} className="btn btn-info" >Update</button>
+                          <button onClick ={() => this.updateItems(stockItems.itemcode)} className="btn btn-info" >Update</button>
                         </td>
                       </tr>
                 )}
