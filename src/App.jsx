@@ -16,6 +16,9 @@ import ViewJobSheet from "./components/jobSheet/viewJobSheet/viewJobSheet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import vehicleList from "./components/vehicle/vehicleList/vehicleList";
+import vehicleCreate from "./components/vehicle/vehicleCreate/vehicleCreate";
+import vehicleView from "./components/vehicle/vehicleView/vehicleView";
 
 class App extends Component {
   state = {};
@@ -63,6 +66,12 @@ class App extends Component {
                     path="/viewJobSheet/:jobSheetId"
                     component={ViewJobSheet}
                   />
+
+                    {/*Vehicle*/}
+                    <Route path = "/vehicleDetails" exact component = {vehicleList}></Route>
+                    <Route path = "/add-vehicle/:id" component = {vehicleCreate}></Route>      
+                    <Route path = "/view-vehicle/:id" component = {vehicleView}></Route>                   
+                    
 
                 </div>
               </Switch>
