@@ -11,66 +11,50 @@ button {
 }
 
 .input_group {
-  flex-basis: 50%;
+  
+  display: flex;
+  align-items: center;
+}
+.input_group_vehicalnumber{
+  display: flex;
+  align-items: center;
+  margin-top: 0.3rem;
+  
+}
+
+
+.input_group_vehicalnumber label {
+  margin-right: 2rem;
+    display: inline-block;
+    
+  }
+
+
+
+.input_group1 {
+  
   display: flex;
   align-items: center;
 }
 
+.input_group1 input {
+  margin: 0.5rem ;
+  margin-left: 3.7rem;
+  display: inline-block;
+}
+
+
 .input_group input {
-  margin: 0.5rem 0;
+  margin: 0.5rem ;
   margin-left: 1rem;
   display: inline-block;
 }
 
 .input_group label {
-  width: 10rem;
+margin-right: 1rem;
   display: inline-block;
 }
 
-.frontSide label {
-  width: 11rem;
-  display: inline-block;
-}
-
-.frontSide input {
-  width: 46rem;
-}
-
-.rearSide label {
-  width: 11rem;
-  display: inline-block;
-}
-
-.rearSide input {
-  width: 46rem;
-}
-
-.leftrightSide label {
-  width: 11rem;
-  display: inline-block;
-}
-
-.leftrightSide input {
-  width: 46rem;
-}
-
-.topSide label {
-  width: 11rem;
-  display: inline-block;
-}
-
-.topSide input {
-  width: 46rem;
-}
-
-.engineRoom label {
-  width: 11rem;
-  display: inline-block;
-}
-
-.engineRoom input {
-  width: 46rem;
-}
 
 .bottomSide label {
   width: 11rem;
