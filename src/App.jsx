@@ -15,6 +15,9 @@ import UpdateJobSheet from "./components/jobSheet/updateJobSheet/updateJobSheet"
 import ViewJobSheet from "./components/jobSheet/viewJobSheet/viewJobSheet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import supplierList from "./components/supplier/supplierList/supplierList";
+import supplierCreate from "./components/supplier/supplierCreate/supplierCreate";
+import supplierView from "./components/supplier/supplierView/supplierView";
 
 
 class App extends Component {
@@ -63,6 +66,11 @@ class App extends Component {
                     path="/viewJobSheet/:jobSheetId"
                     component={ViewJobSheet}
                   />
+
+                  {/* Supplier */}
+                  <Route path = "/supplierDetails" exact component = {supplierList}></Route>
+                  <Route path = "/add-supplier/:id" component = {supplierCreate}></Route> 
+                  <Route path = "/view-supplier/:id" component = {supplierView}></Route> 
 
                 </div>
               </Switch>
