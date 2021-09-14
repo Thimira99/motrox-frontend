@@ -58,6 +58,9 @@ class ViewJobSheet extends Component {
                 Rear(Replace) Parts:{this.state.jobSheet.rearReplace}
               </div>
             </div>
+            <div className={styles.reportButton}>
+              <button className="btn btn-info">Report</button>
+            </div>
           </div>
         </div>
       </div>

@@ -32,3 +32,8 @@
 .detailsGroup div:nth-child(even) {
   padding-left: 2.5rem;
 }
+
+.reportButton {
+  margin-left: 45%;
+  height: 3rem;
+}
