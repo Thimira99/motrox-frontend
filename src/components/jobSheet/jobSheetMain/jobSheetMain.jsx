@@ -32,6 +32,7 @@ class JobSheetMain extends Component {
 
   saveJobSheet = (e) => {
     e.preventDefault();
+
     let jobSheet = {
       customerName: this.state.customerName,
       customerNIC: this.state.customerNIC,
