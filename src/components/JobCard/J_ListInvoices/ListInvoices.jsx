@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InvoiceService from '../../../Services/InvoiceService';
+import { Form, Button, Table,Row,Col } from "react-bootstrap";
 
 import styles from "./List.module.css" 
 
@@ -11,6 +12,7 @@ class ListInvoices extends Component {
       Invoices:[]
         
       }
+      this.editInvoice=this.editInvoice.bind(this);
     
     }
 
@@ -23,6 +25,14 @@ class ListInvoices extends Component {
         console.log(this.state.Invoices);
 
     }
+
+
+    editInvoice(id){
+      this.props.history.push(`/edit_JobCard/${id}`);
+  }
+
+
+
     
 
 
@@ -44,8 +54,9 @@ class ListInvoices extends Component {
                 
               </div>
             </div>
-            <div className={styles.table}>
-              <div className="table  table-bordered">
+           
+            <div className="container p-3 my-3 bg-dark text-white">
+              <Table striped bordered hover variant="dark"> 
                 <thead>
                   <th>Invoice Number</th>
                   <th>Vehical Number</th>
@@ -65,12 +76,19 @@ class ListInvoices extends Component {
                       <td>{InvoiceObj.date}</td>
                       <td>{InvoiceObj.billItemObj.map(ItemObj => <div>{ItemObj.itemcode}</div>)}</td>
                       <td>{InvoiceObj.billItemObj.map(ItemObj => <div>{ItemObj.itemname}</div>)}</td>
+                      <td><div className={styles.saveButton}>
+                          <button className="btn btn-secondary" onClick={()=> this.editInvoice(InvoiceObj.invoicId)}>
+                          Edit
+                         </button>
+                       </div> 
+                      </td>
                     </tr>
                   )
                   }
                 </tbody>
+                </Table>
               </div>
-            </div>
+           
           </>
         );
       }

@@ -9,6 +9,7 @@ import Main from "./components/jobSheet/jobSheetList/jobSheetList";
 import jobSheetList from "./components/jobSheet/jobSheetList/jobSheetList";
 import JobCardMain from "./components/JobCard/J_Main/JobCardMain";
 import ListInvoices from "./components/JobCard/J_ListInvoices/ListInvoices";
+import JobUpdate from "./components/JobCard/J_ListInvoices/JobUpdate";
 
 class App extends Component {
   state = {};
@@ -31,7 +32,8 @@ class App extends Component {
                   <Route path="/jobSheetMain" component={JobSheetMain} />
                   <Route path="/jobParts" component={JobsheetPart} />
                   <Route path="/jobcard" component={JobCardMain} />
-                  <Route path="/view_all_Jobcards" component={ListInvoices} />
+                  <Route path="/view_all_Jobcards" component={ListInvoices}/>
+                  <Route path = "/edit_JobCard/:id" component ={JobUpdate}></Route>
 
                 </div>
               </Switch>

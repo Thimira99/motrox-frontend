@@ -1,8 +1,10 @@
 
 import styles from "./JobCardMain.module.css"
-import { Form, Button, Table,Row,Col } from "react-bootstrap";
+import { Form, Button, Table,Row,Col ,FloatingLabel,InputGroup} from "react-bootstrap";
 import { createRef, Component } from 'react';
 import InvoiceService from "../../../Services/InvoiceService";
+import { Alert } from "bootstrap";
+
 
 
 
@@ -14,6 +16,7 @@ class JobCardMain extends Component {
     
         this.state={
             
+            BillId:'',
             invoicId:'',
             invoiceNumber:'',
             vehicalNumber:'',
@@ -36,7 +39,11 @@ class JobCardMain extends Component {
            itemname: '',
            price: '',
            amount: '',
-           qty:''
+           qty:'',
+
+
+
+           ErrorInvoiceNumber:''
 
         }
 
@@ -47,11 +54,30 @@ class JobCardMain extends Component {
         this.changeDateHandler=this.changeDateHandler.bind(this);
         this.changetotalAmountHandler=this.changetotalAmountHandler.bind(this);
         this.saveInvoice=this.saveInvoice.bind(this);
+        this.validate=this.validate.bind(this);
     
    
         this.viewAll=this.viewAll.bind(this);
+        this.getInvoiceList=this.getInvoiceList.bind(this);
     }
 
+
+//..............
+    getinvoiceByID(){
+
+      InvoiceService.getInvoiceById(this.state.invoicId).then((res) => {
+       
+        let invoice=res.data;
+        console.log(invoice);
+        this.setState({           invoiceNumber: invoice.invoiceNumber,
+                                  vehicalNumber: invoice.vehicalNumber,
+                                  totalAmount: invoice.totalAmount,
+                                  date:invoice.date,
+                                  billItemObj:invoice.billItemObj
+        
+        });
+    });
+    }
 
 
     viewAll(){
@@ -60,8 +86,25 @@ class JobCardMain extends Component {
 
 
 
+
+    dateHandle =(e) =>{
+      let date =e.target.value;
+      if(date == ""){
+        console.log("date no");
+      }
+
+    }
+
+
+
     changeinvoiceNumberHandler(event){
         this.setState({invoiceNumber: event.target.value})
+
+        event.preventDefault();
+        const isValid = this.validate();
+        if(isValid){
+        console.log(this.state);
+        }
     }
 
     changetotalAmountHandler(event){
@@ -78,17 +121,60 @@ class JobCardMain extends Component {
 
 
     saveInvoice = (e) =>{
-        e.preventDefault();
+       
+      e.preventDefault();
 
+     
+
+     
+     
         let invoice={invoiceNumber:this.state.invoiceNumber, vehicalNumber:this.state.vehicalNumber, totalAmount:this.state.totalAmount, 
-        date:this.state.date,billItemObj:this.state.billItemObj};
+        date:this.state.date, billItemObj:this.state.billItemObj};
+
+        
+        
+
+        var arrey = [...this.state.billItemObj];
+       
+        if(arrey.length !== 0){
+        
         console.log('invoice =>'+JSON.stringify(invoice));
 
         InvoiceService.createInvoice(invoice).then(res =>{
             this.props.history.push('/view_all_Jobcards');
         });
 
+
+        const isCheckbox = e.target.type === "checkbox";
+        this.setState({
+          [e.target.name]: isCheckbox
+          ? e.target.checked
+          : e.target.value
+        });
+
+      }else{
+
+        alert("Add Items to Job card");
+
+      }
+
         }
+
+validate = () => {
+  
+  let nameError = "";
+  if(!this.state.invoiceNumber.includes('@')){
+    nameError = "invalid rmail";
+  }
+ if(nameError){
+  this.setState({nameError});
+  return false;
+}
+return true;
+
+
+};
+
 
 
     add = (event) => {
@@ -97,23 +183,31 @@ class JobCardMain extends Component {
 
       
 
-
-      const BillItemObj = {
-        itemcode: this.formData.current.itemcode.value,
-        itemname: this.formData.current.itemname.value,
-        price: this.formData.current.price.value,
-        amount: this.formData.current.amount.value,
-        qty: this.formData.current.qty.value,
-      }
-
-
-      this.state.billItemObj.push(BillItemObj);
-      this.setState({
-        billItemObj: this.state.billItemObj
-      });
-
+      const prize = parseInt(this.formData.current.amount.value)
 
       
+//condition for negative price value
+      if(prize>0){
+
+        const BillItemObj = {
+          itemcode: this.formData.current.itemcode.value,
+          itemname: this.formData.current.itemname.value,
+          price: this.formData.current.price.value,
+          amount: this.formData.current.amount.value,
+          qty: this.formData.current.qty.value,
+        }
+
+
+
+        this.state.billItemObj.push(BillItemObj);
+        this.setState({
+          billItemObj: this.state.billItemObj
+        });
+      }else{
+        alert("cant add");
+      }
+
+     
       
 
 
@@ -174,45 +268,111 @@ class JobCardMain extends Component {
 ItemDelete = (event) => {
   
   
-  const indexOfArray = event.target.value;
+  const indexOfArray = Number(event.target.value);
 
   const number =this.state.billItemObj[indexOfArray].amount;
   console.log(number)
 
   
   console.log(indexOfArray);
-  var array = [...this.state.billItemObj];
+  var arrays = [...this.state.billItemObj];
 
   
 
   if (indexOfArray !== -1) {
-    array.splice(array[event.target.value],1);
-    this.setState({billItemObj: array});
+    arrays.splice(arrays[Number(event.target.value)],1);
+    this.setState({billItemObj: arrays});
   }
 
 
 }
 
 
+
+
+
+
  // increment qty value by 1
  increQty = (event) => {
-  //console.log(event.target.value)
   const indexOfArray = event.target.value;
-  this.state.billItemObj[indexOfArray].qty = this.state.billItemObj[indexOfArray].qty + 1;
+
+
+  let newPrice=Number(this.state.billItemObj[indexOfArray].price);
+  console.log(newPrice)
+
+  
+  this.state.billItemObj[indexOfArray].qty = Number(this.state.billItemObj[indexOfArray].qty) + 1;
+  if(this.state.billItemObj[indexOfArray].qty>=0){
+  this.state.billItemObj[indexOfArray].amount = Number(this.state.billItemObj[indexOfArray].qty) * newPrice;
+
+  this.setState({
+      billItemObj: this.state.billItemObj
+  });
+}else{
+  this.state.billItemObj[indexOfArray].qty = 0;
+
   this.setState({
       billItemObj: this.state.billItemObj
   });
 }
+}
+
+
+
 // decrement qty value by 1
 decreQty = (event) => {
   const indexOfArray = event.target.value;
+
+  let newPrice=Number(this.state.billItemObj[indexOfArray].price);
+  console.log(newPrice)
+
   this.state.billItemObj[indexOfArray].qty = this.state.billItemObj[indexOfArray].qty - 1;
+if(this.state.billItemObj[indexOfArray].qty>=0){
+  this.state.billItemObj[indexOfArray].amount = Number(this.state.billItemObj[indexOfArray].qty) * newPrice;
   this.setState({
       billItemObj: this.state.billItemObj
-  
+  });
+}else{
+  this.state.billItemObj[indexOfArray].qty = 0;
+
+  this.setState({
+      billItemObj: this.state.billItemObj
   });
 }
+}
 
+
+
+getInvoiceList(){
+  InvoiceService.getAllInvoices().then((res) => {
+    let invoice=res.data;
+    console.log(invoice);
+    this.setState({    BillId: invoice.BillId,
+                            
+    
+    });
+
+
+    var arrays = [...invoice];
+    var newarrey = arrays[arrays.length-1];
+    console.log(newarrey.invoicId);
+    var invoicenum = ((newarrey.invoicId)+1);
+    console.log(invoicenum);
+    var code =("JobNum#"+invoicenum)
+    this.setState({ invoicId:invoicenum,
+      invoiceNumber:code
+
+
+    })
+
+
+
+
+
+
+});
+
+}
 
 
 
@@ -221,6 +381,8 @@ decreQty = (event) => {
       InvoiceService.getAllstockItems().then((res) => {
         this.setState({ getItems: res.data});
     });
+
+    this.getInvoiceList();
 
     }
 
@@ -246,6 +408,17 @@ decreQty = (event) => {
                    <input placeholder="Customer Name" name="jobNumber"
                    value={this.state.invoiceNumber} onChange={this.changeinvoiceNumberHandler} />
                 </div>
+
+
+
+
+
+
+
+
+                
+
+                <div>{this.state.ErrorInvoiceNumber}</div>
               
                 <div className={styles.input_group}>
                    <label>Total Amount:</label>
@@ -254,13 +427,17 @@ decreQty = (event) => {
                 </div>
                
             
-            
-
                 <div className={styles.input_group}>
-                  <label>Date:</label>
-                  <input type="Date" placeholder="Date" name="date" 
-                  value={this.state.date} onChange={this.changeDateHandler}/>
+                <label>Date:</label>
+                <input type="Date" placeholder="Date" name="date" 
+                value={this.state.date} onChange={this.changeDateHandler} onClick={this.dateHandle} />
                 </div>
+                 
+                  
+                 
+               
+                
+                
 
                 <div className={styles.input_group_vehicalnumber}>  
                 <label>Vehicle Number:</label>              
@@ -288,10 +465,14 @@ decreQty = (event) => {
 
                 <div className={styles.input_groups}>
                   <label>Item:</label>
+
+                
                     <Form.Select onClick={this.selectAdd}  aria-label="Default select example" name="itemcode">
+                      
                     {this.state.getItems.map(itemObj => <option  > {itemObj.itemcode}</option>)}
                    
                     </Form.Select>
+                  
                 </div>
 
            

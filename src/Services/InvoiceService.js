@@ -12,10 +12,22 @@ class InvoiceService{
     createInvoice(Invoices){
         return axios.post(Invoice_API_Base_Url,Invoices);
     }
+
+
+    getInvoiceById(invoiceid){
+        return axios.get(Invoice_API_Base_Url+"/"+invoiceid);
+    }
+
+
+
  
     getAllstockItems(){
         return axios.get(Item_Base_URL);
     }
+
+
+    
+
 
 
     getitemById(id){
