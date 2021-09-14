@@ -23,6 +23,8 @@ class employeeView extends Component {
             <div>
          
                     <h3 className = "text-center">View employee details</h3>
+
+                    <br/>
              
                         <div className = {styles.dcard}>
 

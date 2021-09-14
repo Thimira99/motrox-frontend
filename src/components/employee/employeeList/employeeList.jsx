@@ -45,11 +45,11 @@ class employeeList extends Component {
                 <h2 className = "text-center">Employee List</h2>
 
                 
-               
-                    <button className = {styles.addUpdate} onClick={this.addEmployee}>Add employee</button>
+             
+                    <button className = "btn btn-primary" onClick={this.addEmployee}>Add employee</button>
 
                     
-                
+                    <br/>  <br/>
 
                 <div className = "row">
                 <table className = "table table-striped table-bordered">
@@ -77,9 +77,9 @@ class employeeList extends Component {
                                     <td className = {styles.aligning}>{employee.employeeCategory}</td>
                                     <td className = {styles.actions}>
                                        
-                                        <button onClick ={ () => this.editEmployee(employee.employeeId)} className = {styles.addUpdate}>Update</button>
-                                        <button onClick ={ () => this.viewEmployee(employee.employeeId)} className = {styles.view}>View</button>
-                                        <button onClick ={ () => this.deleteEmployee(employee.employeeId)} className = {styles.delete}>Delete</button>
+                                        <button onClick ={ () => this.editEmployee(employee.employeeId)} className = "btn btn-info btn-sm">Update</button>&emsp;
+                                        <button onClick ={ () => this.viewEmployee(employee.employeeId)} className = "btn btn-warning btn-sm">View</button>&emsp;
+                                        <button onClick ={ () => this.deleteEmployee(employee.employeeId)} className = "btn btn-danger btn-sm">Delete</button>&emsp;
                                       
                                     </td>
                                 </tr>
