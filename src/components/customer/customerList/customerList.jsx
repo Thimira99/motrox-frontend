@@ -43,7 +43,7 @@ class customerList extends Component {
                 <br/>
                 <h2 className="text-center">Customers List</h2>
                 
-                    <button className={styles.addUpdate} onClick={this.addCustomer}> Add Customer</button>
+                    <button className="btn btn-primary" onClick={this.addCustomer}> Add Customer</button>
                     <br/><br/>
                 
                 <div className="row">
@@ -73,9 +73,9 @@ class customerList extends Component {
                                         <td className= {styles.aligning}>{customer.email}</td>
                                         <td className= {styles.aligning}>{customer.vehicleRegNo}</td>
                                         <td className= {styles.actions}>
-                                            <button onClick = { () => this.editCustomer(customer.customerid)} className ={styles.addUpdate}> Update </button>
-                                            <button  onClick = { () => this.viewCustomer(customer.customerid)} className ={styles.view}> View </button>
-                                            <button  onClick = { () => this.deleteCustomer(customer.customerid)} className ={styles.delete}> Delete </button>
+                                            <button onClick = { () => this.editCustomer(customer.customerid)} className ="btn btn-info btn-sm"> Update </button>&nbsp;
+                                            <button  onClick = { () => this.viewCustomer(customer.customerid)} className ="btn btn-warning btn-sm"> View </button>&nbsp;
+                                            <button  onClick = { () => this.deleteCustomer(customer.customerid)} className ="btn btn-danger btn-sm"> Delete </button>&nbsp;
                                         </td>
                                     </tr>
                                     
