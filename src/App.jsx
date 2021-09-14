@@ -35,6 +35,11 @@ import customerView from "./components/customer/customerView/customerView";
 import customerUpdate from "./components/customer/customerUpdate/customerUpdate";
 import customerCreate from "./components/customer/customerCreate/customerCreate";
 
+import JobCardMain from "./components/JobCard/J_Main/JobCardMain";
+import ListInvoices from "./components/JobCard/J_ListInvoices/ListInvoices";
+import JobUpdate from "./components/JobCard/J_ListInvoices/JobUpdate";
+
+
 
 class App extends Component {
   state = {};
@@ -104,6 +109,11 @@ class App extends Component {
                   <Route path = "/employeeDetails" exact component = {employeeList}></Route>
                   <Route path = "/add-employee/:id" component = {employeeCreate}></Route>
                   <Route path = "/view-employee/:id" component = {employeeView}></Route>
+
+                   {/* Invoice */}
+                   <Route path="/jobcard" component={JobCardMain} />
+                   <Route path="/view_all_Jobcards" component={ListInvoices}/>
+                   <Route path = "/edit_JobCard/:id" component ={JobUpdate}></Route>
 
                 </div>
               </Switch>
