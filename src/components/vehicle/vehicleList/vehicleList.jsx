@@ -47,7 +47,7 @@ class vehicleList extends Component {
             <div><br/>
                 <h2 className= "text-center">Vehicle List</h2>
                     <br/>
-                    <button className = {styles.addUpdate} onClick = {this.addVehicle}>Add Vehicle</button><br/><br/>
+                    <button className = "btn btn-primary" onClick = {this.addVehicle}>Add Vehicle</button><br/><br/>
                 
                 <div className = "row">
                     <table className = "table table-striped table-bordered">
@@ -72,10 +72,11 @@ class vehicleList extends Component {
                                         <td className = {styles.aligning}>{vehicle.yearOfManufacture}</td>   
                                         <td className = {styles.aligning}>{vehicle.model}</td>   
                                         <td className = {styles.actions}>
+                                            <div>
                                             <button onClick = { () => this.editVehicle(vehicle.vehicleId)} className = {styles.addUpdate} >Update</button>
                                             <button  onClick = { () => this.viewVehicle(vehicle.vehicleId)} className = {styles.view} >View</button>
                                             <button  onClick = { () => this.deleteVehicle(vehicle.vehicleId)} className = {styles.delete} >Delete</button>
-                                            
+                                            </div>
                                         </td>                                    
                                     </tr>
                                 )
