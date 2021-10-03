@@ -1,6 +1,8 @@
 import axios from "axios";
 
 const STOCKITEM_API_BASE_URL ="http://localhost:8090/api/v1/stockItems";
+const STOCKITEM_API_BASE_URL2 ="http://localhost:8090/api/v1/stockItemsfindall";
+
 
 class stockItemService{
     getstockItems(){
@@ -15,6 +17,15 @@ class stockItemService{
     updateStockItem(stockItem, itemcode){
         return axios.put(STOCKITEM_API_BASE_URL + '/' + itemcode,stockItem);
     }
+
+
+
+
+
+
+
+
+   
 }
 
 export default new stockItemService()

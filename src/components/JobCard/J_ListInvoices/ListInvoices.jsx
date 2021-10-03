@@ -13,6 +13,8 @@ class ListInvoices extends Component {
         
       }
       this.editInvoice=this.editInvoice.bind(this);
+      this.deleteInvoice=this.deleteInvoice.bind(this);
+      this.addbtn=this.addbtn.bind(this);
     
     }
 
@@ -31,7 +33,15 @@ class ListInvoices extends Component {
       this.props.history.push(`/edit_JobCard/${id}`);
   }
 
+  deleteInvoice(invoicId){
+    this.props.history.push(`/delet-Invoice/${invoicId}`);
+  }
 
+  addbtn(){
+    
+    this.props.history.push('/jobcard');
+    
+  }
 
     
 
@@ -41,18 +51,12 @@ class ListInvoices extends Component {
           <>
             <h2>Job Sheet List</h2>
             <div className={styles.topContainer}>
-              <button className="btn btn-primary" onClick={this.jobSheetMain}>
-                Add Job Sheet
-              </button>
-              <div className={styles.searchBar}>
-                <input
-                  type="text"
-                  id="header-search"
-                  placeholder="Search "
-                  name="s"
-                />
-                
-              </div>
+            <div className={styles.saveButton}>
+                          <button className="btn btn-secondary" onClick={this.addbtn}>
+                          CREATE
+                         </button>
+                       </div> 
+             
             </div>
            
             <div className="container p-3 my-3 bg-dark text-white">
@@ -82,6 +86,17 @@ class ListInvoices extends Component {
                          </button>
                        </div> 
                       </td>
+
+                      <td><div className={styles.saveButton}>
+                          <button className="btn btn-secondary" onClick={()=> this.deleteInvoice(InvoiceObj.invoicId)}>
+                          Delete
+                         </button>
+                       </div> 
+                      </td>
+
+
+
+
                     </tr>
                   )
                   }
