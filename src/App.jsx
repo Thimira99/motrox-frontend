@@ -34,6 +34,10 @@ import customerList from "./components/customer/customerList/customerList";
 import customerView from "./components/customer/customerView/customerView";
 import customerUpdate from "./components/customer/customerUpdate/customerUpdate";
 import customerCreate from "./components/customer/customerCreate/customerCreate";
+import Orders from "./components/Order/Orders/Orders";
+import PurchaseOrder from "./components/Order/PurchaseOrder/PurchaseOrder";
+import ViewOrder from "./components/Order/ViewOrder/ViewOrder";
+
 
 
 class App extends Component {
@@ -104,6 +108,16 @@ class App extends Component {
                   <Route path = "/employeeDetails" exact component = {employeeList}></Route>
                   <Route path = "/add-employee/:id" component = {employeeCreate}></Route>
                   <Route path = "/view-employee/:id" component = {employeeView}></Route>
+
+
+                  {/*order*/}
+                  <Route path = "/purchaseOrder" exact component = {Orders}></Route>
+                  <Route path = "/create-an-order/:id"   component = {PurchaseOrder}></Route>
+                  <Route path = "/view-order/:id"   component = {ViewOrder}></Route>
+                  
+
+                
+                  
 
                 </div>
               </Switch>
