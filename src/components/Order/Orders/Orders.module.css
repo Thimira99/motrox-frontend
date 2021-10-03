@@ -1,0 +1,25 @@
+.searchBar {
+    display: inline-flex;
+    padding-left: 60rem;
+    height: 2rem;
+  }
+  
+  .addButton .searchBar .searchBarImage {
+    border: 1px;
+  }
+  .table {
+    margin-top: 2rem;
+  }
+  
+  .table th {
+    width: 200px;
+  } 
+  .buttons {
+    display: flex;
+  }
+  
+  .buttons button {
+    margin-right: 2px;
+    margin-left: 2px;
+    width: 4rem;
+  }

@@ -40,7 +40,9 @@ import ListInvoices from "./components/JobCard/J_ListInvoices/ListInvoices";
 import JobUpdate from "./components/JobCard/J_ListInvoices/JobUpdate";
 import SearchJobcard from "./components/JobCard/J_ListInvoices/SearchJobcard";
 
-
+import Orders from "./components/Order/Orders/Orders";
+import PurchaseOrder from "./components/Order/PurchaseOrder/PurchaseOrder";
+import ViewOrder from "./components/Order/ViewOrder/ViewOrder";
 
 class App extends Component {
   state = {};
@@ -117,6 +119,15 @@ class App extends Component {
                    <Route path="/view_search_Jobcards" component={SearchJobcard}/>
                    <Route path = "/edit_JobCard/:id" component ={JobUpdate}></Route>
                    <Route path = "/delet-Invoice/:id" component ={JobUpdate}></Route>
+
+                   {/*order*/}
+                  <Route path = "/purchaseOrder" exact component = {Orders}></Route>
+                  <Route path = "/create-an-order/:id"   component = {PurchaseOrder}></Route>
+                  <Route path = "/view-order/:id"   component = {ViewOrder}></Route>
+
+
+
+
 
                 </div>
               </Switch>
