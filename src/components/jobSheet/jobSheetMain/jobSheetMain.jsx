@@ -33,6 +33,22 @@ class JobSheetMain extends Component {
   saveJobSheet = (e) => {
     e.preventDefault();
 
+    if (!!!this.state.customerName)
+      return toast.error("Please input the customer name.");
+
+    if (!!!this.state.customerNIC)
+      return toast.error("Please input the customer NIC.");
+
+    if (!!!this.state.vehicelId)
+      return toast.error("Please input the Vehicle ID.");
+
+    if (!!!this.state.contactNumber)
+      return toast.error("Please input the Contact Number.");
+
+    if (!!!this.state.date) return toast.error("Please input the Date.");
+
+    if (!!!this.state.time) return toast.error("Please input the Time.");
+
     let jobSheet = {
       customerName: this.state.customerName,
       customerNIC: this.state.customerNIC,
@@ -60,78 +76,12 @@ class JobSheetMain extends Component {
     });
   };
 
-  cancel() {}
+  cancel() {
+    this.props.history.push("/jobSheet");
+  }
 
-  changeCustomerNameHandler = (event) => {
-    this.setState({ customerName: event.target.value });
-  };
-
-  changeCustomerNICHandler = (event) => {
-    this.setState({ customerNIC: event.target.value });
-  };
-
-  changeVehicleIdHandler = (event) => {
-    this.setState({ vehicelId: event.target.value });
-  };
-
-  changeContactNumberHandler = (event) => {
-    this.setState({ contactNumber: event.target.value });
-  };
-
-  changeDateHandler = (event) => {
-    this.setState({ date: event.target.value });
-  };
-
-  changeTimeHandler = (event) => {
-    this.setState({ time: event.target.value });
-  };
-
-  changeFrontUsableHandler = (event) => {
-    this.setState({ frontUsable: event.target.value });
-  };
-
-  changeFrontReplaceHandler = (event) => {
-    this.setState({ frontReplace: event.target.value });
-  };
-
-  changeRearUsableHandler = (event) => {
-    this.setState({ rearUsable: event.target.value });
-  };
-
-  changeRearReplaceHandler = (event) => {
-    this.setState({ rearReplace: event.target.value });
-  };
-
-  changelRUsableHandler = (event) => {
-    this.setState({ lRUsable: event.target.value });
-  };
-
-  changelRReplaceHandle = (event) => {
-    this.setState({ lRReplace: event.target.value });
-  };
-
-  changeTopUsableHandler = (event) => {
-    this.setState({ topUsable: event.target.value });
-  };
-
-  changeTopReplaceHandler = (event) => {
-    this.setState({ topReplace: event.target.value });
-  };
-
-  changeEngineRUsableHandler = (event) => {
-    this.setState({ engineRUsable: event.target.value });
-  };
-
-  changeEngineRReplaceHandler = (event) => {
-    this.setState({ engineRReplace: event.target.value });
-  };
-
-  changeBottomUsableHandler = (event) => {
-    this.setState({ bottomUsable: event.target.value });
-  };
-
-  changeBottomReplaceHandler = (event) => {
-    this.setState({ bottomReplace: event.target.value });
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
   };
 
   render() {
@@ -148,58 +98,58 @@ class JobSheetMain extends Component {
         <div className="container p-3 my-3 bg-light border border-dark ">
           <form className={styles.form}>
             <div className={styles.input_group}>
-              <label>Customer Name:</label>
+              <label>Customer Name*:</label>
               <input
                 placeholder="Customer Name"
                 name="customerName"
                 value={this.state.customerName}
-                onChange={this.changeCustomerNameHandler}
+                onChange={this.handleChange}
               />
             </div>
             <div className={styles.input_group}>
-              <label>Customer NIC:</label>
+              <label>Customer NIC*:</label>
               <input
                 placeholder="Customer NIC"
                 name="customerNIC"
                 value={this.state.customerNIC}
-                onChange={this.changeCustomerNICHandler}
+                onChange={this.handleChange}
               />
             </div>
             <div className={styles.input_group}>
-              <label>Vehicle Id:</label>
+              <label>Vehicle Id*:</label>
               <input
                 placeholder="Vehicle Id"
                 name="vehicelId"
                 value={this.state.vehicelId}
-                onChange={this.changeVehicleIdHandler}
+                onChange={this.handleChange}
               />
             </div>
             <div className={styles.input_group}>
-              <label>Contact Number:</label>
+              <label>Contact Number*:</label>
               <input
                 placeholder="Contact Number"
                 name="contactNumber"
                 value={this.state.contactNumber}
-                onChange={this.changeContactNumberHandler}
+                onChange={this.handleChange}
               />
             </div>
             <div className={styles.input_group}>
-              <label>Date:</label>
+              <label>Date*:</label>
               <input
                 type="Date"
                 placeholder="Date"
                 name="date"
                 value={this.state.date}
-                onChange={this.changeDateHandler}
+                onChange={this.handleChange}
               />
             </div>
             <div className={styles.input_group}>
-              <label>Time:</label>
+              <label>Time*:</label>
               <input
                 placeholder="Time"
                 name="time"
                 value={this.state.time}
-                onChange={this.changeTimeHandler}
+                onChange={this.handleChange}
               />
             </div>
             <div className={styles.frontSide}>
@@ -211,7 +161,7 @@ class JobSheetMain extends Component {
                 placeholder="Eg:#----/#----"
                 name="frontUsable"
                 value={this.state.frontUsable}
-                onChange={this.changeFrontUsableHandler}
+                onChange={this.handleChange}
               />
               <div>
                 <label>Front(Replace):</label>
@@ -219,7 +169,7 @@ class JobSheetMain extends Component {
                   placeholder="Eg:#----/#----"
                   name="frontReplace"
                   value={this.state.frontReplace}
-                  onChange={this.changeFrontReplaceHandler}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
@@ -232,7 +182,7 @@ class JobSheetMain extends Component {
                 placeholder="Eg:#----/#----"
                 name="rearUsable"
                 value={this.state.rearUsable}
-                onChange={this.changeRearUsableHandler}
+                onChange={this.handleChange}
               />
               <div>
                 <label>Rear(Replace):</label>
@@ -240,7 +190,7 @@ class JobSheetMain extends Component {
                   placeholder="Eg:#----/#----"
                   name="rearReplace"
                   value={this.state.rearReplace}
-                  onChange={this.changeRearReplaceHandler}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
@@ -253,7 +203,7 @@ class JobSheetMain extends Component {
                 placeholder="Eg:#----/#----"
                 name="lRUsable"
                 value={this.state.lRUsable}
-                onChange={this.changelRUsableHandler}
+                onChange={this.handleChange}
               />
               <div>
                 <label>Left/Right(Replace):</label>
@@ -261,7 +211,7 @@ class JobSheetMain extends Component {
                   placeholder="Eg:#----/#----"
                   name="lRReplace"
                   value={this.state.lRReplace}
-                  onChange={this.changelRReplaceHandle}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
@@ -274,7 +224,7 @@ class JobSheetMain extends Component {
                 placeholder="Eg:#----/#----"
                 name="topUsable"
                 value={this.state.topUsable}
-                onChange={this.changeTopUsableHandler}
+                onChange={this.handleChange}
               />
               <div>
                 <label>Top(Replace):</label>
@@ -282,7 +232,7 @@ class JobSheetMain extends Component {
                   placeholder="Eg:#----/#----"
                   name="topReplace"
                   value={this.state.topReplace}
-                  onChange={this.changeTopReplaceHandler}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
@@ -295,7 +245,7 @@ class JobSheetMain extends Component {
                 placeholder="Eg:#----/#----"
                 name="engineRUsable"
                 value={this.state.engineRUsable}
-                onChange={this.changeEngineRUsableHandler}
+                onChange={this.handleChange}
               />
               <div>
                 <label>Engine Room(Replace):</label>
@@ -303,7 +253,7 @@ class JobSheetMain extends Component {
                   placeholder="Eg:#----/#----"
                   name="engineRReplace"
                   value={this.state.engineRReplace}
-                  onChange={this.changeEngineRReplaceHandler}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
@@ -316,7 +266,7 @@ class JobSheetMain extends Component {
                 placeholder="Eg:#----/#----"
                 name="bottomUsable"
                 value={this.state.bottomUsable}
-                onChange={this.changeBottomUsableHandler}
+                onChange={this.handleChange}
               />
               <div>
                 <label>Bottom(Replace):</label>
@@ -324,7 +274,7 @@ class JobSheetMain extends Component {
                   placeholder="Eg:#----/#----"
                   name="bottomReplace"
                   value={this.state.bottomReplace}
-                  onChange={this.changeBottomReplaceHandler}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>

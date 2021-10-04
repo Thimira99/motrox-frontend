@@ -1,7 +1,9 @@
 import { StylesContext } from "@material-ui/styles";
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import JobSheetService from "../../../Services/JobSheetService";
 import styles from "../viewJobSheet/viewJobSheet.module.css";
+import ReactToPrint from "react-to-print";
+import { render } from "@testing-library/react";
 
 class ViewJobSheet extends Component {
   state = {
