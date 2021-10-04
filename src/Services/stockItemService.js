@@ -15,6 +15,10 @@ class stockItemService{
     updateStockItem(stockItem, itemcode){
         return axios.put(STOCKITEM_API_BASE_URL + '/' + itemcode,stockItem);
     }
+
+    deleteStockItem(itemcode){
+        return axios.delete(STOCKITEM_API_BASE_URL + '/'+ itemcode);
+    }
 }
 
 export default new stockItemService()

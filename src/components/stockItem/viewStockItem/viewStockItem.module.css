@@ -1,0 +1,26 @@
+.viewD{
+  margin: auto;
+}
+.card{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+    margin:auto;
+    padding:25px;
+    border:2px solid black;
+    border-radius: 4px;
+    background-color:#f2f2f2;
+    vertical-align: sub;
+}
+.reportbutton{
+  display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 20%;
+}
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}

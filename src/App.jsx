@@ -15,6 +15,7 @@ import UpdateJobSheet from "./components/jobSheet/updateJobSheet/updateJobSheet"
 import ViewJobSheet from "./components/jobSheet/viewJobSheet/viewJobSheet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import viewStockItem from "./components/stockItem/viewStockItem/viewStockItem";
 
 import employeeList from "./components/employee/employeeList/employeeList";
 import employeeCreate from "./components/employee/employeeCreate/employeeCreate";
@@ -74,9 +75,10 @@ class App extends Component {
                   <Route path="/jobParts" component={JobsheetPart} />
 
                   {/* Item Master */}
-                  <Route path="/updateStock/:item" component={UpdateStockItem}/>
+                  <Route path="/updateStock/:itemcode" component={UpdateStockItem}/>
                   <Route path="/itemMask" exact component={stockList}/>
                   <Route path="/add-stock" component={createStock}/>
+                  <Route path="/view-stock/:itemcode" component={viewStockItem}/>
                   
 
                   <Route
