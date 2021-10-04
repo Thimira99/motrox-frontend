@@ -1,81 +1,203 @@
 button {
-    width: 100%;
-  }
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.input_group {
   
-  .form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-  }
+  display: flex;
+  align-items: center;
+}
+.input_group_vehicalnumber{
+  display: flex;
+  align-items: center;
+  margin-top: 0.3rem;
   
-  .input_group {
+}
+
+
+.input_group_vehicalnumber label {
+  margin-right: 2rem;
+    display: inline-block;
     
-    display: flex;
-    align-items: center;
   }
-  .input_group_vehicalnumber{
-    display: flex;
-    align-items: center;
-    margin-top: 0.3rem;
-    
-  }
+
+
+
+.input_group1 {
   
+  display: flex;
+  align-items: center;
+}
+
+.input_group1 input {
+  margin: 0.5rem ;
+  margin-left: 3.7rem;
+  display: inline-block;
+}
+
+
+.input_group input {
+  margin: 0.5rem ;
+  margin-left: 1rem;
+  display: inline-block;
+}
+
+.input_group label {
+margin-right: 1rem;
+  display: inline-block;
+}
+
+
+.bottomSide label {
+  width: 11rem;
+  display: inline-block;
+}
+
+.bottomSide input {
+  width: 46rem;
+}
+
+.saveButton {
+  width: 18%;
+  display: flex;
+  flex-direction: row;
+  padding-top: 2rem;
+}
+
+.cancelButton {
+  width: 18%;
+  justify-content: flex-end;
+  margin-right: 12rem;
+  padding-top: 2rem;
+}
+.maintag{
+  margin-top: 35px;
+  font-size: 33px;
+}
+button {
+width: 100%;
+}
+
+.form {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+flex-wrap: wrap;
+width: 100%;
+}
+
+.input_group {
+
+display: flex;
+align-items: center;
+}
+.input_group_vehicalnumber{
+display: flex;
+align-items: center;
+margin-top: 0.3rem;
+
+}
+
+
+.input_group_vehicalnumber label {
+margin-right: 2rem;
+  display: inline-block;
   
-  .input_group_vehicalnumber label {
-    margin-right: 2rem;
-      display: inline-block;
-      
-    }
+}
+
+
+
+.input_group1 {
+
+display: flex;
+align-items: center;
+}
+
+.input_group1 input {
+margin: 0.5rem ;
+margin-left: 3.7rem;
+display: inline-block;
+}
+
+
+.input_group input {
+margin: 0.5rem ;
+margin-left: 1rem;
+display: inline-block;
+}
+
+.input_group label {
+margin-right: 1rem;
+display: inline-block;
+}
+
+
+.bottomSide label {
+width: 11rem;
+display: inline-block;
+}
+
+.bottomSide input {
+width: 46rem;
+}
+
+.saveButton {
+width: 18%;
+display: flex;
+flex-direction: row;
+padding-top: 2rem;
+}
+
+.cancelButton {
+width: 18%;
+justify-content: flex-end;
+margin-right: 12rem;
+padding-top: 2rem;
+}
+.topContainer {
+margin-top: 2rem;
+height: 4rem;
+width: 100%;
+display: flex;
+justify-content: space-between;
+}
+
+.searchBar {
+display: inline-flex;
+padding-left: 50rem;
+height: 2rem;
+}
+
+.addButton .searchBar .searchBarImage {
+border: 1px;
+}
+
+.table {
+margin-top: 2rem;
+}
+
+.table th {
+width: 200px;
+}
+
+
+.amount{
+  text-align: right;
+  font-size :60px;;
+}
+.center-col {
   
-  
-  
-  .input_group1 {
-    
-    display: flex;
-    align-items: center;
-  }
-  
-  .input_group1 input {
-    margin: 0.5rem ;
-    margin-left: 3.7rem;
-    display: inline-block;
-  }
-  
-  
-  .input_group input {
-    margin: 0.5rem ;
-    margin-left: 1rem;
-    display: inline-block;
-  }
-  
-  .input_group label {
-  margin-right: 1rem;
-    display: inline-block;
-  }
-  
-  
-  .bottomSide label {
-    width: 11rem;
-    display: inline-block;
-  }
-  
-  .bottomSide input {
-    width: 46rem;
-  }
-  
-  .saveButton {
-    width: 18%;
-    display: flex;
-    flex-direction: row;
-    padding-top: 2rem;
-  }
-  
-  .cancelButton {
-    width: 18%;
-    justify-content: flex-end;
-    margin-right: 12rem;
-    padding-top: 2rem;
-  }
-  
+  height:150px;
+  overflow-y: scroll;
+}
+
+
+

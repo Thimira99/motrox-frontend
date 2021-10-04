@@ -39,6 +39,7 @@ import customerCreate from "./components/customer/customerCreate/customerCreate"
 import JobCardMain from "./components/JobCard/J_Main/JobCardMain";
 import ListInvoices from "./components/JobCard/J_ListInvoices/ListInvoices";
 import JobUpdate from "./components/JobCard/J_ListInvoices/JobUpdate";
+import SearchJobcard from "./components/JobCard/J_ListInvoices/SearchJobcard";
 
 
 
@@ -115,7 +116,9 @@ class App extends Component {
                    {/* Invoice */}
                    <Route path="/jobcard" component={JobCardMain} />
                    <Route path="/view_all_Jobcards" component={ListInvoices}/>
+                   <Route path="/view_search_Jobcards" component={SearchJobcard}/>
                    <Route path = "/edit_JobCard/:id" component ={JobUpdate}></Route>
+                   <Route path = "/delet-Invoice/:id" component ={JobUpdate}></Route>
 
                 </div>
               </Switch>
