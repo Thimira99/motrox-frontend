@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/header/Header";
 import JobsheetPart from "./components/jobSheet/jobsheetPart/JobSheetPart";
 import JobSheetMain from "./components/jobSheet/jobSheetMain/jobSheetMain";
@@ -20,6 +15,7 @@ import UpdateJobSheet from "./components/jobSheet/updateJobSheet/updateJobSheet"
 import ViewJobSheet from "./components/jobSheet/viewJobSheet/viewJobSheet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import viewStockItem from "./components/stockItem/viewStockItem/viewStockItem";
 
 import employeeList from "./components/employee/employeeList/employeeList";
 import employeeCreate from "./components/employee/employeeCreate/employeeCreate";
@@ -37,6 +33,11 @@ import customerList from "./components/customer/customerList/customerList";
 import customerView from "./components/customer/customerView/customerView";
 import customerUpdate from "./components/customer/customerUpdate/customerUpdate";
 import customerCreate from "./components/customer/customerCreate/customerCreate";
+
+import JobCardMain from "./components/JobCard/J_Main/JobCardMain";
+import ListInvoices from "./components/JobCard/J_ListInvoices/ListInvoices";
+import JobUpdate from "./components/JobCard/J_ListInvoices/JobUpdate";
+import SearchJobcard from "./components/JobCard/J_ListInvoices/SearchJobcard";
 
 class App extends Component {
   state = {};
@@ -72,11 +73,16 @@ class App extends Component {
 
                   {/* Item Master */}
                   <Route
-                    path="/updateStock/:item"
+                    path="/updateStock/:itemcode"
                     component={UpdateStockItem}
                   />
                   <Route path="/itemMask" exact component={stockList} />
                   <Route path="/add-stock" component={createStock} />
+                  <Route
+                    path="/view-stock/:itemcode"
+                    component={viewStockItem}
+                  />
+
                   <Route
                     path="/updateJobSheet/:jobSheetId"
                     component={UpdateJobSheet}
@@ -148,6 +154,19 @@ class App extends Component {
                   <Route
                     path="/view-employee/:id"
                     component={employeeView}
+                  ></Route>
+
+                  {/* Invoice */}
+                  <Route path="/jobcard" component={JobCardMain} />
+                  <Route path="/view_all_Jobcards" component={ListInvoices} />
+                  <Route
+                    path="/view_search_Jobcards"
+                    component={SearchJobcard}
+                  />
+                  <Route path="/edit_JobCard/:id" component={JobUpdate}></Route>
+                  <Route
+                    path="/delet-Invoice/:id"
+                    component={JobUpdate}
                   ></Route>
                 </div>
               </Switch>

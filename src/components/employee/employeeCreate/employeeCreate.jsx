@@ -135,7 +135,7 @@ class employeeCreate extends Component {
                                 <div className = {styles.inputs}>
                                         <label>Name</label>
                                         <input type = "text" placeholder = "Enter Full Name" name = "Name" className = "form-control"
-                                        value = {this.state.employeeName} onChange = {this.changeemployeeNameHandler}/> 
+                                        value = {this.state.employeeName} onChange = {this.changeemployeeNameHandler}  /> 
                                 </div>
                                 <div className = {styles.inputs}>
                                         <label>NIC</label>
