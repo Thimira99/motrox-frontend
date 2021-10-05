@@ -77,6 +77,24 @@ findInvoiceNumber(Invoice_Number){
 }
 
 
+generateReport(format){
+    return axios.get(`http://localhost:8080/api/v1/report/${format}`);
+}
+
+
+getpassword(username,password){
+    return axios.get(`http://localhost:8080/api/logins/${username},${password}`);
+}
+
+
+generateReport(Invoice_Number,filename){
+    return axios.get(`http://localhost:8080/api/v1/billreport/${Invoice_Number},${filename}`);
+}
+
+
+
+
+
 }
 
 export default new InvoiceService();

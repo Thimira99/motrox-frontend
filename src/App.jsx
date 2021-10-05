@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route,Redirect } from "react-router-dom";
 import Header from "./components/header/Header";
 import JobsheetPart from "./components/jobSheet/jobsheetPart/JobSheetPart";
 import JobSheetMain from "./components/jobSheet/jobSheetMain/jobSheetMain";
@@ -39,6 +39,11 @@ import ListInvoices from "./components/JobCard/J_ListInvoices/ListInvoices";
 import JobUpdate from "./components/JobCard/J_ListInvoices/JobUpdate";
 import SearchJobcard from "./components/JobCard/J_ListInvoices/SearchJobcard";
 
+import login from "./components/JobCard/J_Main/login";
+import Admin_Login from "./components/Admin_Login";
+
+
+
 class App extends Component {
   state = {};
   render() {
@@ -66,6 +71,8 @@ class App extends Component {
               </div>
               <Switch>
                 <div className="app-content">
+                
+
                   {/* JobSheet */}
                   <Route path="/jobSheet" exact component={jobSheetList} />
                   <Route path="/jobSheetMain" component={JobSheetMain} />
@@ -142,6 +149,20 @@ class App extends Component {
                   ></Route>
 
                   {/* employee */}
+
+                  <Route path = "/employeeDetails" exact component = {employeeList}></Route>
+                  <Route path = "/add-employee/:id" component = {employeeCreate}></Route>
+                  <Route path = "/view-employee/:id" component = {employeeView}></Route>
+
+                   {/* Invoice */}
+                   <Route path="/jobcard" component={JobCardMain} />
+                   <Route path="/view_all_Jobcards" component={ListInvoices}/>
+                   <Route path="/view_search_Jobcards" component={SearchJobcard}/>
+                   <Route path = "/edit_JobCard/:id" component ={JobUpdate}></Route>
+                   <Route path = "/delet-Invoice/:id" component ={JobUpdate}></Route>
+                   <Route path = "/login" component ={login}></Route>
+                  
+
                   <Route
                     path="/employeeDetails"
                     exact
@@ -155,6 +176,7 @@ class App extends Component {
                     path="/view-employee/:id"
                     component={employeeView}
                   ></Route>
+
 
                   {/* Invoice */}
                   <Route path="/jobcard" component={JobCardMain} />
@@ -170,6 +192,8 @@ class App extends Component {
                   ></Route>
                 </div>
               </Switch>
+              <Route path = "/loginadmin" component ={Admin_Login}></Route>
+              <Redirect exact from ='/' to = '/loginadmin'/>
             </div>
           </div>
         </div>
