@@ -4,7 +4,7 @@ import styles from "./updateStockItem.module.css";
 
 class UpdateStockItem extends Component{
     state ={
-        itemcode:'',
+        itemcode:this.props.match.params.itemcode,
         itemname:'',
         qty:'',
         receivedqty:'',
@@ -42,6 +42,9 @@ class UpdateStockItem extends Component{
             price:this.state.price,};
 
           console.log('stockItem => '+ JSON.stringify(stockItem));  
+          stockItemService.updateStockItem(stockItem, this.state.itemcode).then((res =>{
+              this.props.history.push('/itemMask');
+          }));
         }
         
         cancel() {}

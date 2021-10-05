@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from "./createStock.module.css";
-import { useHistory } from "react-router-dom";
 import stockItemService from "../../../Services/stockItemService";
 
 class createStock extends Component {
@@ -14,7 +13,8 @@ class createStock extends Component {
         returnqty:'',
         price:'',
     };
-    saveitem = (e) =>{
+
+    saveitem =(e) =>{
         e.preventDefault();
         let stockItem = {
             itemcode:this.state.itemcode,
@@ -25,14 +25,16 @@ class createStock extends Component {
             damageqty:this.state.damageqty,
             returnqty:this.state.returnqty,
             price:this.state.price,
+            };
 
-        };
             stockItemService.createStockItem(stockItem).then((res)=>{
                 this.props.history.push("/itemMask");
             });
         };
         
-        cancel() {}
+        cancel() {
+            this.props.history.push('stockItems');
+        }
 
         changeitemcodeHandler= (event) => {
             this.setState({itemcode: event.target.value});
@@ -58,6 +60,11 @@ class createStock extends Component {
         changepriceHandler= (event) => {
             this.setState({price: event.target.value});
         };
+
+        
+
+
+
     
     render() {
         return (

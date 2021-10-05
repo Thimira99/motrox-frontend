@@ -14,11 +14,16 @@ class stockList extends Component {
     }
       this.stockListForm = this.stockListForm.bind(this);
       this.updateItems = this.updateItems.bind(this);
+      this.deleteItems = this.deleteItems.bind(this);
     }    
 componentDidMount(){
   stockItemService.getstockItems().then((res) => {
     this.setState({stockItems: res.data});
   });
+}
+
+viewStock(itemcode){
+  this.props.history.push(`/view-stock/${itemcode}`);
 }
 
 stockListForm(){
@@ -29,13 +34,19 @@ updateItems = (itemcode) =>{
   this.props.history.push(`/updateStock/${itemcode}`);
 }
 
+deleteItems(itemcode){
+  stockItemService.deleteStockItem(itemcode).then(res => {
+    this.setState({stockItems: this.state.stockItems.filter(stockItem => stockItem.itemcode !== itemcode)});
+  });
+}
+
 
     render() {
         return (
           <>
             <h2>Stock Item List</h2>
             <div className={styles.topContainer}>
-              <button className="btn btn-primary" onClick={this.stockListForm}>
+              <button id={styles.addStockButton} className="btn btn-primary" onClick={this.stockListForm}>
                 Add stock
               </button>
               <div className={styles.searchBar}>
@@ -71,7 +82,11 @@ updateItems = (itemcode) =>{
                         <td>{stockItems.qty}</td>
                         <td>{stockItems.price}</td>
                         <td>
-                          <button onClick ={() => this.updateItems(stockItems.itemcode)} className="btn btn-info" >Update</button>
+                        <div className={styles.btn}>
+                          <button onClick ={() => this.updateItems(stockItems.itemcode)} className="btn btn-info">Update</button>
+                          <button style={{marginLeft: "10px"}}onClick ={() => this.deleteItems(stockItems.itemcode)} className="btn btn-danger">Delete</button>
+                          <button style={{marginLeft: "10px"}}onClick ={() => this.viewStock(stockItems.itemcode)} className="btn btn-info">View</button>
+                          </div>
                         </td>
                       </tr>
                 )}

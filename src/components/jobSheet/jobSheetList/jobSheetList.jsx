@@ -8,8 +8,10 @@ import { toast } from "react-toastify";
 class jobSheetList extends Component {
   state = {
     jobSheets: [],
+    filteredData: [],
     selectedItem: null,
     isOpen: false,
+    search: "",
   };
 
   editJobSheet = (jobSheetId) =>
@@ -49,13 +51,37 @@ class jobSheetList extends Component {
     });
   }
 
-  render() {
+  searchhandler = ({ target }) => {
+    this.filterData(target.value);
+  };
+
+  filterData = (search) => {
     const { jobSheets } = this.state;
+
+    const result = !!search
+      ? jobSheets.filter(
+          (item) =>
+            item.customerName.toLowerCase().includes(search.toLowerCase()) ||
+            item.customerNIC.includes(search)
+        )
+      : [];
+
+    this.setState({ search, filteredData: result });
+  };
+
+  render() {
+    const { jobSheets, filteredData, search } = this.state;
+    const data = !!search ? filteredData : jobSheets;
+
     return (
       <>
         <h2>Job Sheet List</h2>
         <div className={styles.topContainer}>
-          <button className="btn btn-primary" onClick={this.jobSheetMain}>
+          <button
+            id={styles.addButton}
+            className="btn btn-primary"
+            onClick={this.jobSheetMain}
+          >
             Add Job Sheet
           </button>
           <div className={styles.searchBar}>
@@ -64,28 +90,29 @@ class jobSheetList extends Component {
               id="header-search"
               placeholder="Search "
               name="s"
+              onChange={this.searchhandler}
             />
             <div className={styles.searchBarImage}>
-              <button onClick={this.search}>
+              <button onClick={() => this.filterData(search)}>
                 <SearchIcon />
               </button>
             </div>
           </div>
         </div>
-        {jobSheets && jobSheets.length > 0 ? (
+        {data && data.length > 0 ? (
           <div className={styles.table}>
             <Table hover>
               <thead>
-                <th>#</th>
-                <th>Customer Name</th>
-                <th>Customer NIC</th>
-                <th>Contact Number</th>
-                <th>Date</th>
-                <th>Time</th>
+                <th style={{ textAlign: "left" }}>#</th>
+                <th style={{ textAlign: "left" }}>Customer Name</th>
+                <th style={{ textAlign: "left" }}>Customer NIC</th>
+                <th style={{ textAlign: "left" }}>Contact Number</th>
+                <th style={{ textAlign: "left" }}>Date</th>
+                <th style={{ textAlign: "left" }}>Time</th>
                 <th>Action</th>
               </thead>
               <tbody>
-                {this.state.jobSheets.map((jobDetails, index) => (
+                {data.map((jobDetails, index) => (
                   <tr key={jobDetails.jobSheetId}>
                     <td>{index + 1}</td>
                     <td>{jobDetails.customerName}</td>

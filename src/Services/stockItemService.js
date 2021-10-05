@@ -19,6 +19,11 @@ class stockItemService{
     }
 
 
+    deleteStockItem(itemcode){
+        return axios.delete(STOCKITEM_API_BASE_URL + '/'+ itemcode);
+    }
+
+
 
 
 
