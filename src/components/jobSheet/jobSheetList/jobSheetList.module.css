@@ -1,18 +1,19 @@
 .topContainer {
+  display: flex;
   margin-top: 2rem;
   height: 4rem;
   width: 100%;
-  display: flex;
+
   justify-content: space-between;
 }
 
 .searchBar {
-  display: inline-flex;
-  padding-left: 50rem;
+  display: flex;
   height: 2rem;
+  justify-content: flex-end;
 }
 
-.addButton .searchBar .searchBarImage {
+.addButton .searchBarImage {
   border: 1px;
 }
 
@@ -41,4 +42,8 @@
 
 .delete_modal_buttons button {
   width: 48%;
+}
+
+#addButton {
+  width: 15%;
 }
