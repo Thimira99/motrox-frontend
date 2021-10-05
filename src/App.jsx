@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Header from "./components/header/Header";
 import JobsheetPart from "./components/jobSheet/jobsheetPart/JobSheetPart";
 import JobSheetMain from "./components/jobSheet/jobSheetMain/jobSheetMain";

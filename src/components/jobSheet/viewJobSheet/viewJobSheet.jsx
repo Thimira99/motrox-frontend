@@ -2,6 +2,7 @@ import { StylesContext } from "@material-ui/styles";
 import React, { Component, useRef } from "react";
 import JobSheetService from "../../../Services/JobSheetService";
 import styles from "../viewJobSheet/viewJobSheet.module.css";
+import Pdf from "react-to-pdf";
 
 class ViewJobSheet extends Component {
   state = {
@@ -16,9 +17,10 @@ class ViewJobSheet extends Component {
   }
 
   render() {
+    const ref = React.createRef();
     return (
-      <div>
-        <h2 style={{ marginTop: "1rem" }}>View Details</h2>
+      <div ref={ref}>
+        <h2 style={{ marginTop: "1rem" }}>Details</h2>
         <div className={styles.mainCard}>
           <div className="container p-3 my-3 bg-dark text-white">
             <div className={styles.nameNumber}>
@@ -58,9 +60,21 @@ class ViewJobSheet extends Component {
                 Rear(Replace) Parts:{this.state.jobSheet.rearReplace}
               </div>
             </div>
-            <div className={styles.reportButton}>
-              <button className="btn btn-info">Report</button>
-            </div>
+            <Pdf
+              targetRef={ref}
+              filename="post.pdf"
+              x={0.5}
+              y={0.5}
+              scale={0.8}
+            >
+              {({ toPdf }) => (
+                <div className={styles.reportButton}>
+                  <button onClick={toPdf} className="btn btn-info">
+                    Report
+                  </button>
+                </div>
+              )}
+            </Pdf>
           </div>
         </div>
       </div>
