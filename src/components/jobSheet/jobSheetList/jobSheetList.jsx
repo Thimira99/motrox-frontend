@@ -77,7 +77,11 @@ class jobSheetList extends Component {
       <>
         <h2>Job Sheet List</h2>
         <div className={styles.topContainer}>
-          <button className="btn btn-primary" onClick={this.jobSheetMain}>
+          <button
+            id={styles.addButton}
+            className="btn btn-primary"
+            onClick={this.jobSheetMain}
+          >
             Add Job Sheet
           </button>
           <div className={styles.searchBar}>
