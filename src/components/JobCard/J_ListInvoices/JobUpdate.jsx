@@ -6,6 +6,8 @@ import styles from "./Update.module.css"
 import vehicleService from "../../../Services/vehicleService";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import login from "../J_Main/login";
+import swal from 'sweetalert';
 
 
 
@@ -63,6 +65,7 @@ class JobUpdate extends Component {
     this.changeDateHandler=this.changeDateHandler.bind(this);
     this.changetotalAmountHandler=this.changetotalAmountHandler.bind(this);
     this.saveInvoice=this.saveInvoice.bind(this);
+   
 
 
     this.viewAll=this.viewAll.bind(this);
@@ -190,6 +193,41 @@ changeDateHandler(event){
 changeVehicalHandler(event){
     this.setState({vehicalNumber: event.target.value})
 }
+
+
+
+
+getPdf =(event) =>{
+  event.preventDefault();
+
+  var invoID = this.state.invoicId;
+  var name = "INV"+invoID;
+  console.log(name);
+
+
+  InvoiceService.generateReport(invoID,name).then((res)=>{
+    console.log(res.data);
+    let empp=res.data;
+
+    
+    if(empp!==""){
+      swal(name+" PDF Created Succsesfully!", "", "success")
+    }
+  
+   
+});
+
+
+
+  
+
+
+
+
+}
+
+
+
 
 
 saveInvoice = (e) =>{
@@ -542,7 +580,7 @@ margin-left: 50px;
                          <div className={styles.input_group_amount}>
                           <label>Invoice Number:</label>
                            <input placeholder="Customer Name" name="jobNumber"
-                           value={this.state.invoiceNumber+"          /            "+this.state.vehicalNumber} onChange={this.changeinvoiceNumberHandler} />
+                           value={this.state.invoiceNumber+"          /         "+this.state.vehicalNumber} onChange={this.changeinvoiceNumberHandler} />
                          </div>
                      </Col>
 
@@ -627,10 +665,27 @@ margin-left: 50px;
                                .btn-adds {
                                    width: 85px;
                                    margin-left: auto;
+                                   margin-top: 30px;
                                           }
                                          }
                              `}
                          </style>
+                         <style type="text/css">
+                            {`
+                               .btn-pdf {
+                                   width: 85px;
+                                   margin-left: auto;
+                                   margin-top: 30px;
+                                   margin-left: 200px;
+                                          }
+                                         }
+                             `}
+                         </style>
+
+
+                         <Button size="sm" className="btn btn-secondary" variant="pdf" type="submit" onClick={event => this.getPdf(event)}>
+                                     PDF
+                                 </Button >
 
                                  <Button size="sm" className="btn btn-secondary" variant="adds" type="submit" onClick={this.saveInvoice}>
                                      Update

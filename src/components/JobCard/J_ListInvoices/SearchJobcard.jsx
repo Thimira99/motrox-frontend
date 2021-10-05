@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import InvoiceService from '../../../Services/InvoiceService';
 import { Form, Button, Table,Row,Col } from "react-bootstrap";
+import swal from 'sweetalert';
+
+
 
 import styles from "./List.module.css" 
 
@@ -12,8 +15,8 @@ class SearchJobcard extends Component {
       Invoices:[],
       datefrom:'',
       dateto:'',
-      amount1:0,
-      amount2:0,
+      amount1:'',
+      amount2:'',
       Svehical:'',
       InvoiceId:''
         
@@ -86,25 +89,50 @@ getVehical =( event) =>{
     event.preventDefault();
 
     var VehiNumber = this.state.Svehical;
-    var InvoiceNumber = this.state.invoicId;
+    var InvoiceNumber = this.state.InvoiceId;
+
+console.log(InvoiceNumber);
+console.log( VehiNumber);
+
+if(InvoiceNumber!=="" || VehiNumber!==""){
+
+if(InvoiceNumber===""){
+  console.log("InvoiceNumber");
+  InvoiceService.getVehicalSearch(VehiNumber).then((res) => {
+    this.setState({ Invoices: res.data});
+   let invoice=res.data;
+   console.log(invoice);
+  
+
+});
+
+}else if(VehiNumber===""){
+
+  InvoiceService.findInvoiceNumber(InvoiceNumber).then((res) => {
+    this.setState({ Invoices: res.data});
+   let invoice=res.data;
+   console.log(invoice);
+  
+
+});
+
+}else {
+  swal("Invalid Input!", "Enter Values to the Field!", "warning")
+}
+
+  
+}else{
 
 
-    InvoiceService.findInvoiceNumber(InvoiceNumber).then((res) => {
-        this.setState({ Invoices: res.data});
-       let invoice=res.data;
-       console.log(invoice);
-      
+  swal("Field Values are empty!", "Enter valid Values to the Field!", "warning")
+
+
+
+}
+
+
+
     
-  });
-
-    InvoiceService.getVehicalSearch(VehiNumber).then((res) => {
-        this.setState({ Invoices: res.data});
-       let invoice=res.data;
-       console.log(invoice);
-      
-    
-  });
-
 
 
   }
@@ -126,7 +154,7 @@ addtotal =( event) =>{
 
 
 if(Amount1==="" && Amount2===""){
-        alert("Empty fields ");
+  swal("Amount Not Enterd !", "Enter AmountTo Search!", "warning")
 
     }else{
         if(isnum1==true && isnum2 == true){
@@ -142,7 +170,7 @@ if(Amount1==="" && Amount2===""){
 
 
         }else{
-            alert("Enter digit only ");
+          swal("Enter Digites Only!", "Enter valid Values to the Field!", "warning")
         }
     }
 
@@ -164,7 +192,7 @@ if(Amount1==="" && Amount2===""){
 
         if(datefirst===""){
             console.log("inside if");
-            alert("Select Date")
+            swal("Date Not Selected!", "Select Date!", "warning")
         }else{
   
        
@@ -218,6 +246,7 @@ if(Amount1==="" && Amount2===""){
                           CREATE
                          </button>
                        </div> 
+                       
              
             </div>
            
@@ -234,10 +263,10 @@ if(Amount1==="" && Amount2===""){
           <Form>
 
              <Row>
-                <Col>
+                <Col xs={9} style={{"margin-lefr":"12px"}}>
 
                    <div className={styles.input_group_amount}>
-                    <label>Invoice Number 1:</label>
+                    <label style={{"display":"block ruby"}}>Date From:</label>
                      <input type="Date" placeholder="Customer Name" name="datefrom"
                      name="date" 
                      value={this.state.datefrom} onChange={this.changeDateHandlerfrom} />
@@ -258,17 +287,17 @@ if(Amount1==="" && Amount2===""){
 
 
 {/* second colomn empty ...... */}
-
+<Col xs={3} style={{"margin-right":"125px"}}>
 <div class="col-sm">
 
-<div className={styles.input_group_amount}>
-                    <label>Invoice Number 2:</label>
-                     <input type="Date" placeholder="Customer Name" name="dateto"
+
+                    <label style={{"display":"block ruby"}}>Date To:</label>
+                     <input  type="Date" placeholder="Customer Name" name="dateto"
                      name="date" 
                      value={this.state.dateto} onChange={this.changeDateHandlerto} />
-                   </div>
+                   
 </div>
-
+</Col>
 {/* Third colomn Toatl amount ...... */}
 
 <div class="col-sm">
@@ -285,7 +314,7 @@ if(Amount1==="" && Amount2===""){
                                  </style>
 
                                          <Button size="sm" className="btn btn-secondary" variant="adds" type="submit"  onClick={event => this.adddate(event)}>
-                                             Save
+                                             Search
                                          </Button >
               </Row>
 
@@ -302,13 +331,13 @@ if(Amount1==="" && Amount2===""){
   <Form>
 
      <Row>
-        <Col>
+        <Col style={{"marginLeft":"20px"}}>
 
-           <div className={styles.input_group_amount}>
-            <label>Toal amount 1:</label>
-             <input placeholder="Customer Name" name="jobNumber"
+           
+            <label>Toal From:</label>
+             <input placeholder="Enter First totoal" name="jobNumber"
              onChange={this.changeAmount1} value={this.state.amount1} />
-           </div>
+           
        </Col>
        
 
@@ -349,8 +378,8 @@ if(Amount1==="" && Amount2===""){
 
 <div class="col-sm">
 <div className={styles.input_group_amount}>
-            <label>Toal amount 2:</label>
-             <input placeholder="Customer Name" name="jobNumber"
+            <label style={{"display":"block ruby"}}>Total To:</label>
+             <input placeholder="Enter Second totoal" name="jobNumber"
              onChange={this.changeAmount2} value={this.state.amount2}/>
            </div>
 </div>
@@ -370,7 +399,7 @@ if(Amount1==="" && Amount2===""){
                                                  }
                                      `}
                                  </style>
-      <Button style={{"margin-right": "12px"}} size="sm" className="btn btn-secondary" variant="addsq" type="submit"  onClick={event => this.addtotal(event)}>
+      <Button style={{"margin-right": "12px","marginTop":"10px"}} size="sm" className="btn btn-secondary" variant="addsq" type="submit"  onClick={event => this.addtotal(event)}>
                                              Search
                                          </Button >
       </Row>
@@ -378,13 +407,13 @@ if(Amount1==="" && Amount2===""){
       <Row>
 
          {/* empty row below amount ...... */}
-         <label>Invoice Number:</label>
+         
 
       </Row>
 
       <Row>
           
-      <label>Invoice Number:</label>
+     
                   
         </Row>
 </div>
@@ -399,11 +428,11 @@ if(Amount1==="" && Amount2===""){
 <Form>
 
 <Row>
-<Col>
+<Col style={{"marginLeft":"22px","marginBottom":"10px","marginTop":"25px"}}>
 
 <div className={styles.input_group_amount}>
  <label>Search by ItemNumber:</label>
-  <input placeholder="Customer Name" name="jobNumber"
+  <input placeholder="INV10098" name="jobNumber"
   onChange={this.changeInviyceId} value={this.state.InvoiceId} />
 </div>
 </Col>
@@ -441,35 +470,22 @@ if(Amount1==="" && Amount2===""){
 </Form>
 </div>
 
-
+<Col style={{"marginBottom":"10px","marginTop":"25px"}}>
 {/* second colomn empty ...... */}
 
 <div class="col-sm">
 <div className={styles.input_group_amount}>
- <label>Seach by vehicalNumber:</label>
-  <input placeholder="Customer Name" name="jobNumber"
+ <label style={{"display":"block ruby"}}>Seach by vehicalNumber:</label>
+  <input placeholder="HI-2090" name="jobNumber"
   onChange={this.changedbyVehicalNumber} value={this.state.Svehical}/>
 </div>
 </div>
-
+</Col>
 {/* Third colomn Toatl amount ...... */}
 
 <div class="col-sm">
 <Row>
-<style type="text/css">
-                         {`
-                            .btn-addsq {
-                                width: 85px;
-                                margin-left: auto;
-                                margin-right: 12px
-                                margin-top:20px;
-                                       }
-                                      }
-                          `}
-                      </style>
-<Button style={{"margin-right": "12px"}} size="sm" className="btn btn-secondary" variant="addsq" type="submit"  onClick={event => this.getVehical(event)}>
-                                  Search3
-                              </Button >
+
 </Row>
 
 <Row>
@@ -481,7 +497,20 @@ if(Amount1==="" && Amount2===""){
 
 <Row>
 
-
+<style type="text/css">
+                         {`
+                            .btn-addsq {
+                                width: 85px;
+                                margin-left: auto;
+                                margin-right: 12px
+                                margin-top:20px;
+                                       }
+                                      }
+                          `}
+                      </style>
+<Button style={{"margin-right": "12px","marginTop":"35px"}} size="sm" className="btn btn-secondary" variant="addsq" type="submit"  onClick={event => this.getVehical(event)}>
+                                  Search
+                              </Button >
        
 </Row>
 </div>
@@ -513,38 +542,77 @@ if(Amount1==="" && Amount2===""){
 
 
 
-            <div className="container p-3 my-3 bg-dark text-white">
-              <Table striped bordered hover variant="dark"> 
-                <thead>
-                  <th>Invoice Number</th>
-                  <th>Vehical Number</th>
-                  <th>Total</th>
-                  <th>Date</th>
+            <div className="container p-3 my-3 bg-secondary text-gradient bg-opacity-50 fw-bold">
+              <Table striped bordered hover variant="secondary" class="table table-hover " class="table table-bordered">
+                <thead  style={{'display': 'block'}} >
+                  <th style={{"width":"150px","font-size":"small","fontSize":"15px"}}>Invoice Number</th>
+                  <th style={{"width":"150px","font-size":"small","fontSize":"15px"}}>Vehical Number</th>
+                  <th style={{"width":"150px","font-size":"small","fontSize":"15px"}}>Total</th>
+                  <th style={{"width":"150px","font-size":"small","fontSize":"15px"}}>Date</th>
                   
-                  <th>Item Code</th>
-                  <th>itemname</th>
+                  <th style={{"width":"150px","font-size":"small","fontSize":"15px"}}>Item Code</th>
+                  <th style={{"width":"390px","font-size":"small","fontSize":"15px"}}>itemname</th>
+                  <th style={{"width":"200px","font-size":"small"}}></th>
+                  <th style={{"width":"2px","font-size":"small"}}></th>
                 </thead>
-                <tbody>
-                  {this.state.Invoices.map(
-                    InvoiceObj => 
+                <tbody style={{'height': '410px', 'overflow':'auto', 'display': 'block'}}>
+                  {this.state.Invoices.map(InvoiceObj => 
                     <tr key={InvoiceObj.invoicId}>
-                      <td>{InvoiceObj.invoiceNumber}</td>
-                      <td>{InvoiceObj.vehicalNumber}</td>
-                      <td>{InvoiceObj.totalAmount}</td>
-                      <td>{InvoiceObj.date}</td>
-                      <td>{InvoiceObj.billItemObj.map(ItemObj => <div>{ItemObj.itemcode}</div>)}</td>
-                      <td>{InvoiceObj.billItemObj.map(ItemObj => <div>{ItemObj.itemname}</div>)}</td>
-                      <td><div className={styles.saveButton}>
-                          <button className="btn btn-secondary" onClick={()=> this.editInvoice(InvoiceObj.invoicId)}>
-                          Edit
-                         </button>
+                      <td style={{"width":"150px","font-size":"small"}}>{InvoiceObj.invoiceNumber}</td>
+                      <td style={{"width":"150px","font-size":"small"}}>{InvoiceObj.vehicalNumber}</td>
+                      <td style={{"width":"150px","font-size":"small"}}>{"Rs."+InvoiceObj.totalAmount+".00"}</td>
+                      <td style={{"width":"150px","font-size":"small"}}>{InvoiceObj.date}</td>
+                      <td style={{"width":"150px","font-size":"small"}}>{InvoiceObj.billItemObj.map(ItemObj => <div>{ItemObj.itemcode}</div>)}</td>
+
+                      <td style={{"width":"5px","font-size":"small"}}>{InvoiceObj.billItemObj.map((ItemObj,index )=> <div>{index+1}</div>)}</td>
+
+                      <td style={{"width":"370px","font-size":"small"}}>{InvoiceObj.billItemObj.map(ItemObj => <div>{ItemObj.itemname}</div>)}</td>
+                      <td style={{"width":"90px","font-size":"small"}}><div className={styles.saveButton}>
+
+                      <style type="text/css">
+                                                       {`  
+                                                           .btn-addD {
+                                                           margin-top: 5px;
+                                                            margin-left: 8px;
+                                                            height: 25px;
+                                                            font-size: small;
+                                                            text-align: center;
+                                                            width:55px;
+                                                              
+                                                            }
+                                                            }
+                                                              
+                                                                
+                                                                `}
+                                                              </style>
+                      <Button size="sm" className="btn btn-secondary" variant="addD" type="submit"  onClick={()=> this.editInvoice(InvoiceObj.invoicId)}>
+                                                           View
+                                                       </Button>
+
+                        
                        </div> 
                       </td>
+                      <style type="text/css">
+                                                       {`  
+                                                           .btn-addDel {
+                                                            margin-top: 5px;
+                                                            margin-left: 2px;
+                                                            height: 25px;
+                                                            font-size: small;
+                                                            text-align: center;
+                                                            width:55px;
+                                                              
+                                                            }
+                                                            }
+                                                              
+                                                                
+                                                                `}
+                                                              </style>
 
-                      <td><div className={styles.saveButton}>
-                          <button className="btn btn-secondary" onClick={()=> this.deleteInvoice(InvoiceObj.invoicId)}>
-                          Delete
-                         </button>
+                      <td style={{"width":"25px","font-size":"small"}}><div className={styles.saveButton}>
+                      <Button size="sm" className="btn btn-secondary" variant="addDel" type="submit"  onClick={()=> this.deleteInvoice(InvoiceObj.invoicId)}>
+                                                           Delete
+                                                       </Button>
                        </div> 
                       </td>
 

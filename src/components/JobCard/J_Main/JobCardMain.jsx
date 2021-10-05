@@ -83,6 +83,7 @@ class JobCardMain extends Component {
         this.editInvoice=this.editInvoice.bind(this);
         this.goForSearch=this.goForSearch.bind(this);
         this.goForSearch=this.goForSearch.bind(this);
+        this.goForlogin=this.goForlogin.bind(this);
         
     }
 
@@ -625,42 +626,97 @@ editInvoice(id){
     }
 
 
+   goForpdf(event){
+      event.preventDefault();
+      event.preventDefault();
+   
+  
+   InvoiceService.generateReport("pdf").then((res)=>{
+     console.log(res.data);
+     let empp=res.data;
+     console.log(empp);
+     
+     
+ });
+    }
+
+
+
+   goForlogin(event){
+    event.preventDefault();
+   
+ 
+    this.props.history.push(`/login/`);
+
+
+  }
+
+
+
 
 
     render() {
         return (
             <div >
               <div >
-                <h2>
+                <h2 style = {{"marginTop":"20px"}}>
               JOB CARD
               </h2>
               </div>
             
+              <Row>
 
-
-            <div className={styles.saveButton}>
+              
             <style type="text/css">
     {`
 
 .btn-viewall {
   
-  padding-left: 0px;
-  padding-right: 0px;
+  margin-top: 10px;
   margin-left: 50px;
+  height: 30px;
+  font-size: small;
+  text-align: center;
+  width: 80px;
+  margin-bottom: 20px;
+  background-color: #43607b;
+  
 }
 }
   
     
     `}
   </style>
+ 
+            
+
+           <Col>
+           
               <Button className="btn btn-secondary" variant="viewall" onClick={this.viewAll}>
                 View All
               </Button>
-            </div>
 
-            <Button className="btn btn-secondary" variant="viewall" onClick={this.goForSearch}>
-                View All
+
+              <Button className="btn btn-secondary" variant="viewall" onClick={this.goForSearch}>
+                Search
               </Button>
+
+            <Button className="btn btn-secondary" variant="viewall" onClick={this.goForpdf}>
+               PDF
+              </Button>
+
+              
+
+
+              <Button className="btn btn-secondary" variant="viewall" onClick={this.goForlogin}>
+               Login
+              </Button>
+
+              </Col>
+
+              </Row>
+
+            
             
             {/* First Card ...... */}
             
@@ -765,6 +821,7 @@ editInvoice(id){
                                        .btn-adds {
                                            width: 85px;
                                            margin-left: auto;
+
                                                   }
                                                  }
                                      `}
@@ -918,7 +975,7 @@ editInvoice(id){
                       <div class="row">
                          <div class="col-9">
    
-                               <Table striped bordered hover variant="secondary" class="table table-hover " class="table table-bordered">
+                               <Table striped bordered hover variant="secondary" class="table table-hover " >
 
                                      <thead style={{'display': 'block'}} class="table-dark">
                                         <tr>
@@ -941,9 +998,9 @@ editInvoice(id){
                                                            <td>{index+1}</td>
                                                            <td style={{'width': '150px',"font-size":"small"}}>{item.itemcode}</td>
                                                            <td style={{'width': '250px',"font-size":"small"}}>{item.itemname}</td>
-                                                           <td style={{'width': '150px',"font-size":"small"}}>{item.price}</td>
+                                                           <td style={{'width': '150px',"font-size":"small"}}>{"Rs."+item.price+".00"}</td>
                                                            <td style={{'width': '50px',"font-size":"small"}}>{item.qty}</td>
-                                                           <td style={{'width': '125px',"font-size":"small"}}>{item.amount}</td>
+                                                           <td style={{'width': '125px',"font-size":"small"}}>{"Rs."+item.amount+".00"}</td>
 
                                                            <td style={{"width":"155px","font-size":"small"}}>
                                                 <style type="text/css">
@@ -1064,22 +1121,8 @@ editInvoice(id){
 
 
 </div>
-<div className="container p-3 my-3 bg-secondary text-white bg-opacity-50">
-
-<label>Date:</label>
-              <input type="Date" placeholder="Date" name="date" 
-              value={this.state.date} onChange={this.changeDateHandler} />
-              <input type="Date" placeholder="Date" name="date2" 
-              value={this.state.date2} onChange={this.changeDateHandler2}/>
-<Button size="sm" className="btn btn-secondary" variant="addD" type="submit"  onClick={event => this.adddate(event)}>
-                                                           View
-                                                       </Button>
 
 
-
-
- 
-</div>
 
 </div>
           
